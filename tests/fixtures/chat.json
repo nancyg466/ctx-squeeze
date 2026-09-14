@@ -1,0 +1,54 @@
+[
+  {
+    "role": "system",
+    "content": "You are a careful build engineer diagnosing CI failures."
+  },
+  {
+    "role": "user",
+    "content": "The nightly build has been failing since Tuesday, can you look into it?"
+  },
+  {
+    "role": "assistant",
+    "content": "Let me check the job logs.",
+    "tool_calls": [
+      {"id": "call_1", "type": "function", "function": {"name": "read_logs", "arguments": "{\"job\": \"nightly\"}"}}
+    ]
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "call_1",
+    "content": "03:14 job started; 03:19 cache miss detected; dependency install began from an empty cache."
+  },
+  {
+    "role": "assistant",
+    "content": "The dependency cache is being rebuilt from scratch on every run."
+  },
+  {
+    "role": "user",
+    "content": "What changed on Monday?"
+  },
+  {
+    "role": "assistant",
+    "content": "Let me check the commit history.",
+    "tool_calls": [
+      {"id": "call_2", "type": "function", "function": {"name": "git_log", "arguments": "{\"since\": \"monday\"}"}}
+    ]
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "call_2",
+    "content": "commit abc123: bump runner image to v5"
+  },
+  {
+    "role": "assistant",
+    "content": "The runner image bump on Monday dropped the cached layer."
+  },
+  {
+    "role": "user",
+    "content": "Can you patch the workflow file to restore the cache step?"
+  },
+  {
+    "role": "assistant",
+    "content": "Sure, I'll add a cache restore step and pin the runner image."
+  }
+]
