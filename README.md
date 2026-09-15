@@ -83,12 +83,12 @@ ctx-squeeze --budget 4000 --strategy dedupe,score --jaccard 0.7 transcript.txt
 OpenAI shape (Anthropic-style `content` block lists are accepted too):
 
 ```console
-$ ctx-squeeze --messages --budget 120 --recent-turns 1 --stats chat.json
+$ ctx-squeeze --messages --budget 120 --recent-turns 2 --stats chat.json
 kept 7 of 11 messages | 172 -> 106 tokens (budget 120)
 [
   {
     "role": "system",
-    "content": "You are a careful build engineer."
+    "content": "You are a careful build engineer diagnosing CI failures."
   },
   {
     "role": "system",
@@ -96,7 +96,7 @@ kept 7 of 11 messages | 172 -> 106 tokens (budget 120)
   },
   {
     "role": "user",
-    "content": "Can you patch the workflow file?"
+    "content": "What changed on Monday?"
   },
   ...
 ]
